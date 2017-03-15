@@ -1,6 +1,6 @@
 {
   "name": "gulp-html-accents",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Replace accents for HTML Entities.",
   "main": "index.js",
   "scripts": {

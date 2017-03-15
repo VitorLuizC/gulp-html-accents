@@ -58,7 +58,7 @@ module.exports = (options = {}) => {
     if (chunck.contents instanceof Buffer) {
       let text = chunck.contents.toString();
       try {
-        file.contents = new Buffer(replace(text, options));
+        chunck.contents = new Buffer(replace(text, options));
       } catch (err) {
         throw new PluginError(name, err);
       }
