@@ -1,0 +1,30 @@
+{
+  "name": "gulp-html-accents",
+  "version": "1.0.0",
+  "description": "Replace accents for HTML Entities.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VitorLuizC/gulp-html-accents.git"
+  },
+  "keywords": [
+    "gulp",
+    "gulp-plugin",
+    "gulpplugin",
+    "html",
+    "accents"
+  ],
+  "author": "Vitor Luiz Cavalcanti <vitorluizc@outlook.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/VitorLuizC/gulp-html-accents/issues"
+  },
+  "homepage": "https://github.com/VitorLuizC/gulp-html-accents#readme",
+  "dependencies": {
+    "gulp-util": "^3.0.8",
+    "through2": "^2.0.3"
+  }
+}
