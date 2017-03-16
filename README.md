@@ -34,7 +34,7 @@ Ex.
   ...
   .pipe(accents({
     dictionary: {
-      '?': '&#x3F;'
+      '@': '&#x40;'
     }
   }))
 ```

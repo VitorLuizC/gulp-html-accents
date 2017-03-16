@@ -9,7 +9,7 @@ describe('gulp-html-accents unit tests', () => {
 
   it('encode only accents to HTML Entities', done => {
     const processed = accents({
-      dictionary: {'?': '&#x3F;'},
+      dictionary: {'@': '&#x40;'},
       append: true
     });
     const contents = {
@@ -17,11 +17,13 @@ describe('gulp-html-accents unit tests', () => {
       <p>
         Olá!
         Tudo bem com você?
+        x@y.com
       </p>`,
       output: `
       <p>
         Ol&#xE1;!
-        Tudo bem com voc&#xEA;&#x3F;
+        Tudo bem com voc&#xEA;?
+        x&#x40;y.com
       </p>`
     };
     const file = new File({

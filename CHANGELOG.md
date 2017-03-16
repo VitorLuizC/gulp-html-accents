@@ -1,5 +1,9 @@
 # parse-sass-vars changelog
 
+## 1.1.1
+- fixed unit test and an example;
+- issue tracked! custom dictionary not working for RegExp special characters.
+
 ## 1.1.0
 - **append** option to add custom dictionary values instead of replace default one;
 - added better examples on README;
