@@ -21,13 +21,17 @@ const buildRegExp = dictionary => new RegExp(`(${Object.keys(dictionary).join('|
  * @typedef Options
  * @type {Object}
  * @property {Dictionary} dictionary
+ * @property {boolean} append Append custom dictionary values to default one
  */
 
 /**
  * Default plugin options.
  * @type {Options}
  */
-const defaultOptions = { dictionary };
+const defaultOptions = {
+  dictionary: {},
+  append: true
+};
 
 /**
  * Find dictionary key and replace by its value.
@@ -54,6 +58,9 @@ const replace = (text, options) => {
 module.exports = (options = {}) => {
   options = Object.assign({}, defaultOptions, options);
 
+  if (options.append)
+    options.dictionary = Object.assign({}, dictionary, options.dictionary);
+
   return through.obj(function (chunck, encode, done) {
     if (chunck.contents instanceof Buffer) {
       let text = chunck.contents.toString();
@@ -69,3 +76,5 @@ module.exports = (options = {}) => {
     return done();
   });
 };
+
+module.exports.replace = replace;

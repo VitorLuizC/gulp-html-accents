@@ -1,10 +1,10 @@
 {
   "name": "gulp-html-accents",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Replace accents for HTML Entities.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha ./test.js"
   },
   "repository": {
     "type": "git",
@@ -26,5 +26,10 @@
   "dependencies": {
     "gulp-util": "^3.0.8",
     "through2": "^2.0.3"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "vinyl": "^2.0.1"
   }
 }
