@@ -1,5 +1,11 @@
 # parse-sass-vars changelog
 
+## 2.0.0
+- added support to special characters and regex-match using custom accents;
+- added **accents** a simple array of accents to append or replace default accents;
+- removed **dictionary** option;
+- added left and right quotes characters.
+
 ## 1.1.1
 - fixed unit test and an example;
 - issue tracked! custom dictionary not working for RegExp special characters.

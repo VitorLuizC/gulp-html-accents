@@ -9,9 +9,16 @@ describe('gulp-html-accents unit tests', () => {
 
   it('encode only accents to HTML Entities', done => {
     const processed = accents({
-      dictionary: {'@': '&#x40;'},
-      append: true
+      accents: [
+        {
+          literal: '?',
+          entity: '&#x3F;',
+          expression: '\\\?'
+        }
+      ],
+      replace: false
     });
+
     const contents = {
       input: `
       <p>
@@ -22,10 +29,11 @@ describe('gulp-html-accents unit tests', () => {
       output: `
       <p>
         Ol&#xE1;!
-        Tudo bem com voc&#xEA;?
-        x&#x40;y.com
+        Tudo bem com voc&#xEA;&#x3F;
+        x@y.com
       </p>`
     };
+
     const file = new File({
       contents: new Buffer(contents.input)
     });

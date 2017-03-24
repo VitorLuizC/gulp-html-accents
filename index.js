@@ -1,80 +1,87 @@
 const through = require('through2');
 const { PluginError } = require('gulp-util');
 const { name } = require('./package.json');
-const dictionary = require('./dictionary.json');
-
 
 /**
- * An object in which the key is the character to be found and value the HTML Entity that replaces it.
- * @typedef {Object.<string, string>} Dictionary
+ * An accent's structure to provide finder and replacer.
+ * @typedef {Object} Accent
+ * @property {string} literal
+ * @property {string} entity
+ * @property {(string|undefined)} expression
  */
 
 /**
- * Build a RegExp to find dictionary keys.
- * @param {Dictionary} dictionary
- * @returns {RegExp}
+ * Default accents.
+ * @type {Array.<Accent>}
  */
-const buildRegExp = dictionary => new RegExp(`(${Object.keys(dictionary).join('|')})`, 'g');
+const accents = require('./accents.json');
+
+/**
+ * Find an accent by accent expression or literal and replace to entity.
+ * @param {string} text
+ * @param {Array.<Accent>} accents
+ */
+function replaceAccents(text, accents) {
+  let finder = new RegExp(`(${
+    accents
+      .map(accent => (accent.expression) ? accent.expression : accent.literal)
+      .join('|')
+  })`, 'g');
+
+  return text.replace(finder, matched => {
+    return accents.find(accent => accent.literal === matched).entity || matched;
+  });
+}
 
 /**
  * Plugin settings.
  * @typedef Options
  * @type {Object}
- * @property {Dictionary} dictionary
- * @property {boolean} append Append custom dictionary values to default one
+ * @property {Array.<Accent>} accents
+ * @property {boolean} append Append custom dictionary values to default one.
  */
 
 /**
- * Default plugin options.
- * @type {Options}
- */
-const defaultOptions = {
-  dictionary: {},
-  append: true
-};
-
-/**
- * Find dictionary key and replace by its value.
- * @param {string} text
+ * Replaces file's accents to HTML Entities.
+ * @example
+ * '<h1>Idéias</h1>' => '<h1>Id&#xE9;ias</h1>'
  * @param {Options} options
  */
-const replace = (text, options) => {
-  let finder = buildRegExp(options.dictionary);
+function gulpHtmlAccents(options = {}) {
+  options = options || {};
+
+  options.append = (typeof options.append === 'boolean') ? options.append : true;
+  options.accents = (Array.isArray(options.accents)) ? options.accents : [];
+
+  if (!options.append) {
+    
+  }
+
+
+  options.accents = (options.replace) ? options.accents : [].concat(accents, options.accents || []);
 
   /**
-   * Replace character matched by dictionary value.
-   * @param {string} character
-   * @returns {string}
+   * Replaces buffer file's accents to HTML Entities.
+   * @param {{ contents: Buffer }} file
+   * @param {string} encode
+   * @param {function} done
    */
-  let replacer = character => options.dictionary[character];
+  function replaceFileAccents(file, encode, done) {
+    let { contents } = file;
 
-  return text.replace(finder, replacer);
-};
-
-/**
- * Replaces characters with accents by HTML Entity.
- * @param {Options} options
- */
-module.exports = (options = {}) => {
-  options = Object.assign({}, defaultOptions, options);
-
-  if (options.append)
-    options.dictionary = Object.assign({}, dictionary, options.dictionary);
-
-  return through.obj(function (chunck, encode, done) {
-    if (chunck.contents instanceof Buffer) {
-      let text = chunck.contents.toString();
+    if (contents instanceof Buffer) {
       try {
-        chunck.contents = new Buffer(replace(text, options));
+        file.contents = new Buffer(replaceAccents(contents.toString('utf8'), options.accents));
       } catch (err) {
         throw new PluginError(name, err);
       }
     }
 
-    this.push(chunck);
+    this.push(file);
+    done();
+  }
 
-    return done();
-  });
-};
+  return through.obj(replaceFileAccents);
+}
 
-module.exports.replace = replace;
+module.exports = gulpHtmlAccents;
