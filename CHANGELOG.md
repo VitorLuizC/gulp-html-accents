@@ -1,5 +1,11 @@
 # parse-sass-vars changelog
 
+## 3.0.0
+- use he module instead of encoding with accents.json;
+- removed **accents** option;
+- removed **dictionary** option;
+- added all [he.encode options](https://github.com/mathiasbynens/he#heencodetext-options)
+
 ## 2.0.0
 - added support to special characters and regex-match using custom accents;
 - added **accents** a simple array of accents to append or replace default accents;

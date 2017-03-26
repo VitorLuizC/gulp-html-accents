@@ -1,7 +1,7 @@
 # gulp-html-accents
 [![Build Status](https://travis-ci.org/VitorLuizC/gulp-html-accents.svg?branch=master)](https://travis-ci.org/VitorLuizC/gulp-html-accents)
 
-Replace accents with HTML Entities.
+Replace accents with HTML Entities using [he module](https://www.npmjs.com/package/he).
 
 ```html
 <p>Olá, tudo bem com você?</p>
@@ -28,19 +28,6 @@ gulp.task('process:html', () => {
 ```
 
 ## Options
-- `append`: (boolean | default = true) Append custom accents, instead of replace
-default ones
-- `accents`: (Accent[]) Custom accents.
-  Ex.
-  ```js
-  gulpHtmlAccents(accents: [
-    {
-      literal: '?', // literal character.
-
-      expression: '\\\?', // RegExp character (optional). Used to fix special
-                          // characters issues on RegExp, like ? which break it.
-
-      entity: '&#x3F;' // HTML Entity to replace character
-    }
-  ])
-  ```
+gulp-html-accents uses he.encode to encode and it's options.
+<br>
+## [```he.encode```](https://github.com/mathiasbynens/he#heencodetext-options)

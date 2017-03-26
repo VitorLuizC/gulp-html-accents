@@ -1,64 +1,41 @@
+const he = require('he');
 const through = require('through2');
 const { PluginError } = require('gulp-util');
 const { name } = require('./package.json');
 
 /**
- * An accent's structure to provide finder and replacer.
- * @typedef {Object} Accent
- * @property {string} literal
- * @property {string} entity
- * @property {(string|undefined)} expression
- */
-
-/**
- * Default accents.
- * @type {Array.<Accent>}
- */
-const accents = require('./accents.json');
-
-/**
- * Find an accent by accent expression or literal and replace to entity.
+ * Encodes HTML file contents using he module.
  * @param {string} text
- * @param {Array.<Accent>} accents
+ * @param {he.EncodeOptions} options
+ * @returns {string}
  */
-function replaceAccents(text, accents) {
-  let finder = new RegExp(`(${
-    accents
-      .map(accent => (accent.expression) ? accent.expression : accent.literal)
-      .join('|')
-  })`, 'g');
+function encodeHtmlAccents(text, options) {
 
-  return text.replace(finder, matched => {
-    return accents.find(accent => accent.literal === matched).entity || matched;
-  });
+  /**
+   * Default encode options.
+   * @type {he.EncodeOptions}
+   */
+  const defaultOptions = {
+    strict: true,
+    allowUnsafeSymbols: true,
+    encodeEverything: false,
+    decimal: false,
+    useNamedReferences: false
+  };
+
+  options = Object.assign({}, defaultOptions, options);
+
+  return he.encode(text, options);
 }
-
-/**
- * Plugin settings.
- * @typedef Options
- * @type {Object}
- * @property {Array.<Accent>} accents
- * @property {boolean} append Append custom dictionary values to default one.
- */
 
 /**
  * Replaces file's accents to HTML Entities.
  * @example
  * '<h1>Idéias</h1>' => '<h1>Id&#xE9;ias</h1>'
- * @param {Options} options
+ * @param {he.EncodeOptions} options
  */
 function gulpHtmlAccents(options = {}) {
-  options = options || {};
-
-  options.append = (typeof options.append === 'boolean') ? options.append : true;
-  options.accents = (Array.isArray(options.accents)) ? options.accents : [];
-
-  if (!options.append) {
-    
-  }
-
-
-  options.accents = (options.replace) ? options.accents : [].concat(accents, options.accents || []);
+  options = (options instanceof Object) ? options : {};
 
   /**
    * Replaces buffer file's accents to HTML Entities.
@@ -71,7 +48,7 @@ function gulpHtmlAccents(options = {}) {
 
     if (contents instanceof Buffer) {
       try {
-        file.contents = new Buffer(replaceAccents(contents.toString('utf8'), options.accents));
+        file.contents = new Buffer(encodeHtmlAccents(contents.toString('utf8'), options));
       } catch (err) {
         throw new PluginError(name, err);
       }
