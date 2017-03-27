@@ -1,4 +1,4 @@
-# parse-sass-vars changelog
+# gulp-html-accents changelog
 
 ## 3.0.0
 - use he module instead of encoding with accents.json;
