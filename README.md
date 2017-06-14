@@ -1,4 +1,6 @@
 # gulp-html-accents
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/VitorLuizC/gulp-html-accents.svg)](https://greenkeeper.io/)
 [![Build Status](https://travis-ci.org/VitorLuizC/gulp-html-accents.svg?branch=master)](https://travis-ci.org/VitorLuizC/gulp-html-accents)
 
 Replace accents with HTML Entities using [he module](https://www.npmjs.com/package/he).
