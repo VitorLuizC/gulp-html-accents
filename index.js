@@ -16,7 +16,7 @@ function encodeHtmlAccents(text, options) {
    * @type {he.EncodeOptions}
    */
   const defaultOptions = {
-    strict: true,
+    strict: false,
     allowUnsafeSymbols: true,
     encodeEverything: false,
     decimal: false,
