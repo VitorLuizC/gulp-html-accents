@@ -1,7 +1,12 @@
-import he from 'he';
-import through from 'through2';
-import { PluginError } from 'gulp-util';
-import { name } from './package.json';
+'use strict';
+
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
+var he = _interopDefault(require('he'));
+var through = _interopDefault(require('through2'));
+var gulpUtil = require('gulp-util');
+
+var name = "gulp-html-accents";
 
 /**
  * Encodes HTML file contents using he module.
@@ -15,7 +20,7 @@ function encodeHtmlAccents(text, options) {
    * Default encode options.
    * @type {he.EncodeOptions}
    */
-  const defaultOptions = {
+  var defaultOptions = {
     strict: false,
     allowUnsafeSymbols: true,
     encodeEverything: false,
@@ -34,7 +39,9 @@ function encodeHtmlAccents(text, options) {
  * '<h1>Idéias</h1>' => '<h1>Id&#xE9;ias</h1>'
  * @param {he.EncodeOptions} options
  */
-function gulpHtmlAccents(options = {}) {
+function gulpHtmlAccents(options) {
+  if ( options === void 0 ) options = {};
+
   options = (options instanceof Object) ? options : {};
 
   /**
@@ -44,13 +51,13 @@ function gulpHtmlAccents(options = {}) {
    * @param {function} done
    */
   function replaceFileAccents(file, encode, done) {
-    let { contents } = file;
+    var contents = file.contents;
 
     if (contents instanceof Buffer) {
       try {
         file.contents = new Buffer(encodeHtmlAccents(contents.toString('utf8'), options));
       } catch (err) {
-        throw new PluginError(name, err);
+        throw new gulpUtil.PluginError(name, err);
       }
     }
 
@@ -61,4 +68,4 @@ function gulpHtmlAccents(options = {}) {
   return through.obj(replaceFileAccents);
 }
 
-export default gulpHtmlAccents;
+module.exports = gulpHtmlAccents;

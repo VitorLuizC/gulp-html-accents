@@ -1,5 +1,14 @@
 # gulp-html-accents changelog
 
+## 3.1.0
+- bundle with bili;
+  - exposed compiled ES module;
+  - exposed compiled CommonJS module;
+- added prepare script to bundle and test sources.
+
+## 3.0.1
+- set strict: false as default option since some characters break it.
+
 ## 3.0.0
 - use he module instead of encoding with accents.json;
 - removed **accents** option;

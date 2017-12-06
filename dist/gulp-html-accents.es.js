@@ -1,7 +1,8 @@
 import he from 'he';
 import through from 'through2';
 import { PluginError } from 'gulp-util';
-import { name } from './package.json';
+
+var name = "gulp-html-accents";
 
 /**
  * Encodes HTML file contents using he module.
@@ -15,7 +16,7 @@ function encodeHtmlAccents(text, options) {
    * Default encode options.
    * @type {he.EncodeOptions}
    */
-  const defaultOptions = {
+  var defaultOptions = {
     strict: false,
     allowUnsafeSymbols: true,
     encodeEverything: false,
@@ -34,7 +35,9 @@ function encodeHtmlAccents(text, options) {
  * '<h1>Idéias</h1>' => '<h1>Id&#xE9;ias</h1>'
  * @param {he.EncodeOptions} options
  */
-function gulpHtmlAccents(options = {}) {
+function gulpHtmlAccents(options) {
+  if ( options === void 0 ) options = {};
+
   options = (options instanceof Object) ? options : {};
 
   /**
@@ -44,7 +47,7 @@ function gulpHtmlAccents(options = {}) {
    * @param {function} done
    */
   function replaceFileAccents(file, encode, done) {
-    let { contents } = file;
+    var contents = file.contents;
 
     if (contents instanceof Buffer) {
       try {
