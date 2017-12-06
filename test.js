@@ -1,6 +1,6 @@
 const { assert } = require('chai');
 const File = require('vinyl');
-const accents = require('./');
+const accents = require('./dist/gulp-html-accents.common.js');
 
 function processFile(process, contents, callback) {
   let file = new File({
