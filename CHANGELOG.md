@@ -1,12 +1,12 @@
 # gulp-html-accents changelog
 
-## 3.1.0
+## 3.2.0
 - bundle with bili;
   - exposed compiled ES module;
   - exposed compiled CommonJS module;
 - added prepare script to bundle and test sources.
 
-## 3.0.1
+## 3.1.0
 - set strict: false as default option since some characters break it.
 
 ## 3.0.0
