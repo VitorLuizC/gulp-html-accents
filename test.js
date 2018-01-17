@@ -3,7 +3,7 @@
 var chai = require('chai');
 var assert = chai.assert;
 var File = require('vinyl');
-var accents = require('./dist/gulp-html-accents.common.js');
+var accents = require('./');
 
 function processFile(process, contents, callback) {
   var file = new File({

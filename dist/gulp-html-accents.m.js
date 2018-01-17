@@ -1,8 +1,11 @@
+/*!
+ * gulp-html-accents v3.3.0
+ * (c) 2017-present Vitor Luiz Cavalcanti <vitorluizc@outlook.com>
+ * Released under the MIT License.
+ */
 import he from 'he';
 import through from 'through2';
 import { PluginError } from 'gulp-util';
-
-var name = "gulp-html-accents";
 
 /**
  * Encodes HTML file contents using he module.
@@ -38,7 +41,7 @@ function encodeHtmlAccents(text, options) {
 function gulpHtmlAccents(options) {
   if ( options === void 0 ) options = {};
 
-  options = (options instanceof Object) ? options : {};
+  options = options instanceof Object ? options : {};
 
   /**
    * Replaces buffer file's accents to HTML Entities.
@@ -53,7 +56,7 @@ function gulpHtmlAccents(options) {
       try {
         file.contents = new Buffer(encodeHtmlAccents(contents.toString('utf8'), options));
       } catch (err) {
-        throw new PluginError(name, err);
+        throw new PluginError('gulp-html-accents', err);
       }
     }
 

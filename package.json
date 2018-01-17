@@ -1,11 +1,11 @@
 {
   "name": "gulp-html-accents",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "description": "Replace accents for HTML Entities.",
-  "main": "dist/gulp-html-accents.common.js",
-  "module": "dist/gulp-html-accents.es.js",
+  "main": "dist/gulp-html-accents.cjs.js",
+  "module": "dist/gulp-html-accents.m.js",
   "scripts": {
-    "build": "bili index.js --format cjs --format es",
+    "build": "bili index.js --banner --formats es,cjs",
     "test": "mocha ./test.js",
     "prepare": "npm run build && npm run test"
   },
@@ -32,7 +32,7 @@
     "through2": "^2.0.3"
   },
   "devDependencies": {
-    "bili": "^0.19.0",
+    "bili": "^1.6.3",
     "chai": "^4.1.2",
     "mocha": "^4.0.1",
     "vinyl": "^2.1.0"

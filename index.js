@@ -1,7 +1,6 @@
 import he from 'he';
 import through from 'through2';
 import { PluginError } from 'gulp-util';
-import { name } from './package.json';
 
 /**
  * Encodes HTML file contents using he module.
@@ -50,7 +49,7 @@ function gulpHtmlAccents(options = {}) {
       try {
         file.contents = new Buffer(encodeHtmlAccents(contents.toString('utf8'), options));
       } catch (err) {
-        throw new PluginError(name, err);
+        throw new PluginError('gulp-html-accents', err);
       }
     }
 
