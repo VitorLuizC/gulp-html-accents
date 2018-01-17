@@ -1,5 +1,10 @@
 # gulp-html-accents changelog
 
+## 3.3.0
+- upgraded bili;
+  - added banner;
+- added EditorConfig settings;
+
 ## 3.2.0
 - bundle with bili;
   - exposed compiled ES module;
