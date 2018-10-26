@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/VitorLuizC/gulp-html-accents#readme",
   "dependencies": {
-    "he": "^1.1.1",
+    "he": "^1.2.0",
     "gulp-util": "^3.0.8",
     "through2": "^2.0.3"
   },
