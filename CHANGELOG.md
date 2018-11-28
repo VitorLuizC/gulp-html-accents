@@ -1,5 +1,14 @@
 # gulp-html-accents changelog
 
+## 3.4.0
+- improved code readability;
+- fixed warning notice about `Buffer` usage;
+- upgraded through2;
+- upgraded bili;
+  - used buble instead of babel;
+- improved repository definitions;
+- improved docs;
+
 ## 3.3.0
 - upgraded bili;
   - added banner;

@@ -3,13 +3,9 @@
  * (c) 2017-present Vitor Luiz Cavalcanti <vitorluizc@outlook.com>
  * Released under the MIT License.
  */
-'use strict';
-
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
-
-var he = _interopDefault(require('he'));
-var through = _interopDefault(require('through2'));
-var gulpUtil = require('gulp-util');
+import he from 'he';
+import through from 'through2';
+import { PluginError } from 'gulp-util';
 
 /**
  * Concat custom options with default ones.
@@ -45,7 +41,7 @@ var gulpHtmlAccents = function (options) {
         var contents = he.encode(file.contents.toString('utf8'), resolveOptions(options));
         file.contents = Buffer.from(contents);
       } catch (err) {
-        throw new gulpUtil.PluginError('gulp-html-accents', err);
+        throw new PluginError('gulp-html-accents', err);
       }
     }
 
@@ -54,4 +50,4 @@ var gulpHtmlAccents = function (options) {
   });
 };
 
-module.exports = gulpHtmlAccents;
+export default gulpHtmlAccents;
