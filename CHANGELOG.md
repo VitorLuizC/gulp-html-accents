@@ -1,5 +1,8 @@
 # gulp-html-accents changelog
 
+## 3.4.1
+- Replaced deprecated gulp-util to plugin-error;
+
 ## 3.4.0
 - improved code readability;
 - fixed warning notice about `Buffer` usage;

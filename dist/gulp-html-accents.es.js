@@ -1,11 +1,11 @@
 /*!
- * gulp-html-accents v3.4.0
+ * gulp-html-accents v3.4.1
  * (c) 2017-present Vitor Luiz Cavalcanti <vitorluizc@outlook.com>
  * Released under the MIT License.
  */
 import he from 'he';
 import through from 'through2';
-import { PluginError } from 'gulp-util';
+import PluginError from 'plugin-error';
 
 /**
  * Concat custom options with default ones.

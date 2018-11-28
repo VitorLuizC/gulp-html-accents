@@ -1,5 +1,5 @@
 /*!
- * gulp-html-accents v3.4.0
+ * gulp-html-accents v3.4.1
  * (c) 2017-present Vitor Luiz Cavalcanti <vitorluizc@outlook.com>
  * Released under the MIT License.
  */
@@ -9,7 +9,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var he = _interopDefault(require('he'));
 var through = _interopDefault(require('through2'));
-var gulpUtil = require('gulp-util');
+var PluginError = _interopDefault(require('plugin-error'));
 
 /**
  * Concat custom options with default ones.
@@ -45,7 +45,7 @@ var gulpHtmlAccents = function (options) {
         var contents = he.encode(file.contents.toString('utf8'), resolveOptions(options));
         file.contents = Buffer.from(contents);
       } catch (err) {
-        throw new gulpUtil.PluginError('gulp-html-accents', err);
+        throw new PluginError('gulp-html-accents', err);
       }
     }
 
