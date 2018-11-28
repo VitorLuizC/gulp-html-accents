@@ -7,7 +7,7 @@ var accents = require('./');
 
 function processFile(process, contents, callback) {
   var file = new File({
-    contents: new Buffer(contents)
+    contents: Buffer.from(contents)
   });
 
   process.write(file);

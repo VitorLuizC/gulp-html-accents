@@ -3,51 +3,31 @@ import through from 'through2';
 import { PluginError } from 'gulp-util';
 
 /**
- * Encodes HTML file contents using he module.
- * @param {string} text
- * @param {he.EncodeOptions} options
- * @returns {string}
+ * Concat custom options with default ones.
+ * @param {import('he').EncodeOptions} options
+ * @returns {import('he').EncodeOptions}
  */
-function encodeHtmlAccents(text, options) {
-
-  /**
-   * Default encode options.
-   * @type {he.EncodeOptions}
-   */
-  const defaultOptions = {
-    strict: false,
-    allowUnsafeSymbols: true,
-    encodeEverything: false,
-    decimal: false,
-    useNamedReferences: false
-  };
-
-  options = Object.assign({}, defaultOptions, options);
-
-  return he.encode(text, options);
-}
+const resolveOptions = (options = {}) => ({
+  strict: false,
+  decimal: false,
+  encodeEverything: false,
+  allowUnsafeSymbols: true,
+  useNamedReferences: false,
+  ...options
+});
 
 /**
  * Replaces file's accents to HTML Entities.
  * @example
  * '<h1>Idéias</h1>' => '<h1>Id&#xE9;ias</h1>'
- * @param {he.EncodeOptions} options
+ * @param {import('he').EncodeOptions} [options]
  */
-function gulpHtmlAccents(options = {}) {
-  options = (options instanceof Object) ? options : {};
-
-  /**
-   * Replaces buffer file's accents to HTML Entities.
-   * @param {{ contents: Buffer }} file
-   * @param {string} encode
-   * @param {function} done
-   */
-  function replaceFileAccents(file, encode, done) {
-    let { contents } = file;
-
-    if (contents instanceof Buffer) {
+const gulpHtmlAccents = (options = {}) => {
+  return through.obj(function (file, _, done) {
+    if (file.contents instanceof Buffer) {
       try {
-        file.contents = new Buffer(encodeHtmlAccents(contents.toString('utf8'), options));
+        const contents = he.encode(file.contents.toString('utf8'), resolveOptions(options));
+        file.contents = Buffer.from(contents);
       } catch (err) {
         throw new PluginError('gulp-html-accents', err);
       }
@@ -55,9 +35,7 @@ function gulpHtmlAccents(options = {}) {
 
     this.push(file);
     done();
-  }
-
-  return through.obj(replaceFileAccents);
-}
+  });
+};
 
 export default gulpHtmlAccents;
