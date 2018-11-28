@@ -1,6 +1,6 @@
 import he from 'he';
 import through from 'through2';
-import { PluginError } from 'gulp-util';
+import PluginError from 'plugin-error';
 
 /**
  * Concat custom options with default ones.
