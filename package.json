@@ -7,7 +7,7 @@
   "scripts": {
     "build": "bili index.js --banner --formats es,cjs",
     "test": "mocha ./test.js",
-    "prepare": "npm run build && npm run test"
+    "prepare": "yarn build && yarn test"
   },
   "repository": {
     "type": "git",

@@ -1,10 +1,16 @@
-# Logs
-logs
+# Unversioned files and folders.
+# References at https://git-scm.com/docs/gitignore.
+
+# Finder's configuration files (Mac).
+.DS_Store
+
+# Node.js modules.
+node_modules/
+
+# NPM's lockfile.
+# We're using Yarn and it provides it's own lockfile.
+npm-lockfile.json
+
+# Log's files.
 *.log
-npm-debug.log*
-
-# Dependency directories
-node_modules
-
-# VS Code settings folder
-.vscode
+*.log.*
